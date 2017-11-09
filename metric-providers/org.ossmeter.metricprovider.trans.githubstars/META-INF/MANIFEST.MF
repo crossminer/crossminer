@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Githubstars
+Bundle-SymbolicName: org.ossmeter.metricprovider.trans.githubstars;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.ossmeter.metricprovider.trans.githubstars.Activator
+Require-Bundle: org.eclipse.core.runtime,
+ com.googlecode.pongo.runtime,
+ com.googlecode.pongo.runtime,
+ org.apache.log4j.1.2.17,
+ org.ossmeter.platform,
+ org.ossmeter.repository.model,
+ org.ossmeter.repository.model.importerdependencies,
+ org.ossmeter.repository.model.github
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Export-Package: org.ossmeter.metricprovider.trans.githubstars,
+ org.ossmeter.metricprovider.trans.githubstars.model
+ 

@@ -1,0 +1,10 @@
+package org.ossmeter.metricprovider.trans.githubstars.model;
+
+@db(qualifiedCollectionNames="true")
+class Stars {
+	val Stargazers[*] stargazers; 
+}
+class Stargazers {
+	attr String login;
+	attr String datestamp;
+}

@@ -1,0 +1,11 @@
+{
+	"metricid" : "org.ossmeter.metricprovider.trans.githubstars",
+	"vis" : [ 
+		{
+			"id" : "stars",
+			"name" : "Stars",
+			"description" : "The list of stargazers." 
+		}
+	]
+
+}
