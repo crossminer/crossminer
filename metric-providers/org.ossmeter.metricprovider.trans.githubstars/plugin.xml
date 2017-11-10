@@ -13,5 +13,11 @@
     <class name="org.ossmeter.metricprovider.trans.githubstars.model.Stars"/>
     <class name="org.ossmeter.metricprovider.trans.githubstars.model.Stargazers"/>
   </extension>
+   <extension
+         point="org.ossmeter.platform.visualisation.metric">
+      <visualisation
+            json="vis/trans.githubstas.json">
+      </visualisation>
+   </extension>
   
 </plugin>

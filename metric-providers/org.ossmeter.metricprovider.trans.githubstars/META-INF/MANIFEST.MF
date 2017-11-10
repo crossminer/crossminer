@@ -11,7 +11,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.ossmeter.platform,
  org.ossmeter.repository.model,
  org.ossmeter.repository.model.importerdependencies,
- org.ossmeter.repository.model.github
+ org.ossmeter.repository.model.github,
+ org.ossmeter.platform.visualisation;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: org.ossmeter.metricprovider.trans.githubstars,
