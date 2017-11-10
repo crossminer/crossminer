@@ -1,5 +1,5 @@
 {
-	"metricid" : "org.ossmeter.metricprovider.Stars.stargazers",
+	"metricid" : "Stars.stargazers",
 	"vis" : [ 
 		{
 			"id" : "stars",
