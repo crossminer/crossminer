@@ -1,0 +1,10 @@
+package org.ossmeter.metricprovider.trans.dependencies.model;
+
+@db(qualifiedCollectionNames="true")
+class Container {
+	val Dependencies[*] dependencies; 
+}
+class Dependencies {
+	attr String dependency;
+	attr String discoverFile;
+}

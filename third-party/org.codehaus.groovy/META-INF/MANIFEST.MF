@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Groovy
+Bundle-SymbolicName: org.codehaus.groovy
+Bundle-Version: 2.6.0
+Bundle-ClassPath: groovy-2.6.0-alpha-1.jar
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-Vendor: Eclipse
+Export-Package: org.codehaus.groovy.ast,
+ org.codehaus.groovy.ast.builder,
+ org.codehaus.groovy.ast.expr
