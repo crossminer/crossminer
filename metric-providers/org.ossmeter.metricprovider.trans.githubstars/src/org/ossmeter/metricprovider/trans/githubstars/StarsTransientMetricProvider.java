@@ -47,7 +47,7 @@ public class StarsTransientMetricProvider implements ITransientMetricProvider<St
 	protected MetricProviderContext context;
 
 	public StarsTransientMetricProvider() {
-		logger = (OssmeterLogger) OssmeterLogger.getLogger("metricprovider.importer.gitHub");
+		logger = (OssmeterLogger) OssmeterLogger.getLogger("metricprovider.trans.githubstars.StarsTransientMetricProvider");
 	}
 
 	public final static String IDENTIFIER = "org.ossmeter.metricprovider.trans.githubstar";
