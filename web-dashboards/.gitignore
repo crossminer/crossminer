@@ -8,3 +8,6 @@ __pycache__
 .project
 .pydevproject
 .settings
+
+# Data files
+eclipse*

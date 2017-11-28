@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 # Copy JSON items with dependencies information to Elasticsearch
@@ -31,11 +31,13 @@ import logging
 from grimoire_elk.elk.elastic import ElasticSearch
 
 def get_params():
+    desc_help = 'Import JSON items with CROSSMINER dependencies in ElasticSearch'
     parser = argparse.ArgumentParser(usage="usage:dependencies2es [options]",
-                                     description="Import JSON items with CROSSMINER dependencies in ElasticSearch")
+                                     description=desc_help)
     parser.add_argument("-f", "--file", required=True, help="JSON file with the dependencies")
     parser.add_argument("-e", "--elastic-url", required=True, help="ElasticSearch URL")
-    parser.add_argument("-i", "--index", required=True, help="ElasticSearch index in which to import the mongodb items")
+    parser.add_argument("-i", "--index", required=True,
+                        help="ElasticSearch index in which to import the mongodb items")
     parser.add_argument('-g', '--debug', dest='debug', action='store_true')
     parser.add_argument('-p', '--project', help="Name of the project for the dependencies")
     args = parser.parse_args()
@@ -153,5 +155,6 @@ if __name__ == '__main__':
     items = fetch_dependencies(args.file, args.project)
 
     if items:
-        logging.info("Loading dependencies in Elasticsearch")
+        logging.info("Loading dependencies in Elasticsearch ...")
         elastic.bulk_upload_sync(items, "uuid")
+        logging.info("Import completed.")
