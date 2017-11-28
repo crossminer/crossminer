@@ -84,3 +84,5 @@ The panel is ready at the URL:
 http://localhost:5601/app/kibana#/dashboard/AV7RLRT1TD5aYQ-eX8nd
 
 ![](screenshot.png?raw=true)
+
+There is a [draft reference manual](https://docs.google.com/document/d/1OJj6WNgAsR9UvWGOThIoyjucSMNH55B88qQ8e52NPVY/edit?usp=sharing) available for this dashboard.
