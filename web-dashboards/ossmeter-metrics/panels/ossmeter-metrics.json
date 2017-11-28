@@ -9,7 +9,14 @@
             },
             "optionsJSON": "{\"darkTheme\":false}",
             "panelsJSON": "[{\"col\":1,\"id\":\"AV7RKgONTD5aYQ-eX8nV\",\"panelIndex\":2,\"row\":6,\"size_x\":2,\"size_y\":3,\"type\":\"visualization\"},{\"col\":3,\"id\":\"AV7RKv6lTD5aYQ-eX8nc\",\"panelIndex\":4,\"row\":1,\"size_x\":2,\"size_y\":8,\"type\":\"visualization\"},{\"col\":1,\"id\":\"AV7RKlOeTD5aYQ-eX8nb\",\"panelIndex\":5,\"row\":1,\"size_x\":2,\"size_y\":5,\"type\":\"visualization\"},{\"col\":8,\"id\":\"AV7Y7w7KTD5aYQ-eX8n0\",\"panelIndex\":6,\"row\":3,\"size_x\":5,\"size_y\":2,\"type\":\"visualization\"},{\"col\":8,\"id\":\"AV7Y7-SxTD5aYQ-eX8n6\",\"panelIndex\":7,\"row\":7,\"size_x\":5,\"size_y\":2,\"type\":\"visualization\"},{\"col\":5,\"id\":\"AV7Z8qVETD5aYQ-eX8oN\",\"panelIndex\":9,\"row\":1,\"size_x\":3,\"size_y\":6,\"type\":\"visualization\"},{\"col\":8,\"id\":\"AV7g01ncTD5aYQ-eX8qR\",\"panelIndex\":10,\"row\":5,\"size_x\":5,\"size_y\":2,\"type\":\"visualization\"},{\"col\":8,\"id\":\"AV7hPpETTD5aYQ-eX8qe\",\"panelIndex\":11,\"row\":1,\"size_x\":5,\"size_y\":2,\"type\":\"visualization\"},{\"col\":5,\"id\":\"AV7kRHYqfuk55ZFAddqv\",\"panelIndex\":12,\"row\":7,\"size_x\":3,\"size_y\":2,\"type\":\"visualization\"}]",
-            "timeRestore": false,
+            "refreshInterval": {
+                "display": "Off",
+                "pause": false,
+                "value": 0
+            },
+            "timeFrom": "now-2y",
+            "timeRestore": true,
+            "timeTo": "now",
             "title": "OSSMeter",
             "uiStateJSON": "{\"P-11\":{\"vis\":{\"legendOpen\":true}},\"P-12\":{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}},\"P-2\":{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}},\"P-4\":{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}},\"P-5\":{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}},\"P-9\":{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}}}",
             "version": 1
