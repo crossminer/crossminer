@@ -43,7 +43,7 @@ http://localhost:5601/app/kibana#/dashboard/AWAElMdqWJ8CNnVirCtn
 
 Let's check the big numbers: number of commits in repositories.
 
-|| Perceval Commits  | GrimoireLab commits |
+|| Perceval Commits  | GrimoireELK commits |
 |--| ------------- | ------------- |
 |OSSMeter|  801 | 1,510  |
 |GrimoireLab|  807 | 1,678  |
