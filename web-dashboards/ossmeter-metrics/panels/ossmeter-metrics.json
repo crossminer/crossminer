@@ -8,17 +8,17 @@
                 "searchSourceJSON": "{\"filter\":[{\"query\":{\"match_all\":{}}}],\"highlightAll\":true,\"version\":true}"
             },
             "optionsJSON": "{\"darkTheme\":false}",
-            "panelsJSON": "[{\"col\":1,\"id\":\"AV7RKgONTD5aYQ-eX8nV\",\"panelIndex\":2,\"row\":6,\"size_x\":2,\"size_y\":3,\"type\":\"visualization\"},{\"col\":3,\"id\":\"AV7RKv6lTD5aYQ-eX8nc\",\"panelIndex\":4,\"row\":1,\"size_x\":2,\"size_y\":8,\"type\":\"visualization\"},{\"col\":1,\"id\":\"AV7RKlOeTD5aYQ-eX8nb\",\"panelIndex\":5,\"row\":1,\"size_x\":2,\"size_y\":5,\"type\":\"visualization\"},{\"col\":8,\"id\":\"AV7Y7w7KTD5aYQ-eX8n0\",\"panelIndex\":6,\"row\":3,\"size_x\":5,\"size_y\":2,\"type\":\"visualization\"},{\"col\":8,\"id\":\"AV7Y7-SxTD5aYQ-eX8n6\",\"panelIndex\":7,\"row\":7,\"size_x\":5,\"size_y\":2,\"type\":\"visualization\"},{\"col\":5,\"id\":\"AV7Z8qVETD5aYQ-eX8oN\",\"panelIndex\":9,\"row\":1,\"size_x\":3,\"size_y\":6,\"type\":\"visualization\"},{\"col\":8,\"id\":\"AV7g01ncTD5aYQ-eX8qR\",\"panelIndex\":10,\"row\":5,\"size_x\":5,\"size_y\":2,\"type\":\"visualization\"},{\"col\":8,\"id\":\"AV7hPpETTD5aYQ-eX8qe\",\"panelIndex\":11,\"row\":1,\"size_x\":5,\"size_y\":2,\"type\":\"visualization\"},{\"col\":5,\"id\":\"AV7kRHYqfuk55ZFAddqv\",\"panelIndex\":12,\"row\":7,\"size_x\":3,\"size_y\":2,\"type\":\"visualization\"}]",
+            "panelsJSON": "[{\"col\":1,\"id\":\"AV7RKgONTD5aYQ-eX8nV\",\"panelIndex\":2,\"row\":6,\"size_x\":2,\"size_y\":3,\"type\":\"visualization\"},{\"col\":3,\"id\":\"AV7RKv6lTD5aYQ-eX8nc\",\"panelIndex\":4,\"row\":1,\"size_x\":2,\"size_y\":8,\"type\":\"visualization\"},{\"col\":1,\"id\":\"AV7RKlOeTD5aYQ-eX8nb\",\"panelIndex\":5,\"row\":1,\"size_x\":2,\"size_y\":5,\"type\":\"visualization\"},{\"col\":8,\"id\":\"AV7Y7w7KTD5aYQ-eX8n0\",\"panelIndex\":6,\"row\":3,\"size_x\":5,\"size_y\":2,\"type\":\"visualization\"},{\"col\":8,\"id\":\"AV7Y7-SxTD5aYQ-eX8n6\",\"panelIndex\":7,\"row\":7,\"size_x\":5,\"size_y\":2,\"type\":\"visualization\"},{\"col\":5,\"id\":\"AV7Z8qVETD5aYQ-eX8oN\",\"panelIndex\":9,\"row\":1,\"size_x\":3,\"size_y\":6,\"type\":\"visualization\"},{\"col\":8,\"id\":\"AV7g01ncTD5aYQ-eX8qR\",\"panelIndex\":10,\"row\":5,\"size_x\":5,\"size_y\":2,\"type\":\"visualization\"},{\"col\":8,\"id\":\"AV7hPpETTD5aYQ-eX8qe\",\"panelIndex\":11,\"row\":1,\"size_x\":2,\"size_y\":2,\"type\":\"visualization\"},{\"col\":5,\"id\":\"AV7kRHYqfuk55ZFAddqv\",\"panelIndex\":12,\"row\":7,\"size_x\":3,\"size_y\":2,\"type\":\"visualization\"},{\"col\":10,\"id\":\"AWAF5sfIWJ8CNnVirCt9\",\"panelIndex\":13,\"row\":1,\"size_x\":3,\"size_y\":2,\"type\":\"visualization\"}]",
             "refreshInterval": {
                 "display": "Off",
                 "pause": false,
                 "value": 0
             },
-            "timeFrom": "now-2y",
+            "timeFrom": "now-5y",
             "timeRestore": true,
             "timeTo": "now",
             "title": "OSSMeter",
-            "uiStateJSON": "{\"P-11\":{\"vis\":{\"legendOpen\":true}},\"P-12\":{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}},\"P-2\":{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}},\"P-4\":{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}},\"P-5\":{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}},\"P-9\":{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}}}",
+            "uiStateJSON": "{\"P-11\":{\"vis\":{\"legendOpen\":true}},\"P-12\":{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}},\"P-13\":{\"vis\":{\"defaultColors\":{\"0 - 100\":\"rgb(0,104,55)\"}}},\"P-2\":{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}},\"P-4\":{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}},\"P-5\":{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}},\"P-9\":{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}}}",
             "version": 1
         }
     },
@@ -45,7 +45,7 @@
                 "title": "OSSMeterDataSources",
                 "uiStateJSON": "{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}}",
                 "version": 1,
-                "visState": "{\"title\":\"OSSMeterDataSources\",\"type\":\"table\",\"params\":{\"perPage\":10,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false,\"sort\":{\"columnIndex\":null,\"direction\":null},\"showTotal\":false,\"totalFunc\":\"sum\"},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"metric_class.keyword\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}"
+                "visState": "{\"title\":\"OSSMeterDataSources\",\"type\":\"table\",\"params\":{\"perPage\":10,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false,\"sort\":{\"columnIndex\":null,\"direction\":null},\"showTotal\":false,\"totalFunc\":\"sum\"},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{\"customLabel\":\"Samples\"}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"metric_class.keyword\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"\"}}],\"listeners\":{}}"
             }
         },
         {
@@ -53,12 +53,12 @@
             "value": {
                 "description": "",
                 "kibanaSavedObjectMeta": {
-                    "searchSourceJSON": "{\n  \"index\": \"ossmeter\",\n  \"query\": {\n    \"match_all\": {}\n  },\n  \"filter\": []\n}"
+                    "searchSourceJSON": "{\"index\":\"ossmeter\",\"query\":{\"match_all\":{}},\"filter\":[]}"
                 },
                 "title": "OSSMeterMetricsName",
-                "uiStateJSON": "{\n  \"vis\": {\n    \"params\": {\n      \"sort\": {\n        \"columnIndex\": null,\n        \"direction\": null\n      }\n    }\n  }\n}",
+                "uiStateJSON": "{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}}",
                 "version": 1,
-                "visState": "{\n  \"title\": \"OSSMeterMetricsName\",\n  \"type\": \"table\",\n  \"params\": {\n    \"perPage\": 15,\n    \"showPartialRows\": false,\n    \"showMeticsAtAllLevels\": false,\n    \"sort\": {\n      \"columnIndex\": null,\n      \"direction\": null\n    },\n    \"showTotal\": false,\n    \"totalFunc\": \"sum\"\n  },\n  \"aggs\": [\n    {\n      \"id\": \"1\",\n      \"enabled\": true,\n      \"type\": \"count\",\n      \"schema\": \"metric\",\n      \"params\": {}\n    },\n    {\n      \"id\": \"2\",\n      \"enabled\": true,\n      \"type\": \"terms\",\n      \"schema\": \"bucket\",\n      \"params\": {\n        \"field\": \"metric_name.keyword\",\n        \"size\": 100,\n        \"order\": \"desc\",\n        \"orderBy\": \"1\"\n      }\n    }\n  ],\n  \"listeners\": {}\n}"
+                "visState": "{\"title\":\"OSSMeterMetricsName\",\"type\":\"table\",\"params\":{\"perPage\":15,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false,\"sort\":{\"columnIndex\":null,\"direction\":null},\"showTotal\":false,\"totalFunc\":\"sum\"},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{\"customLabel\":\"Samples\"}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"metric_name.keyword\",\"size\":100,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}"
             }
         },
         {
@@ -66,12 +66,12 @@
             "value": {
                 "description": "",
                 "kibanaSavedObjectMeta": {
-                    "searchSourceJSON": "{\n  \"index\": \"ossmeter\",\n  \"query\": {\n    \"match_all\": {}\n  },\n  \"filter\": []\n}"
+                    "searchSourceJSON": "{\"index\":\"ossmeter\",\"query\":{\"match_all\":{}},\"filter\":[]}"
                 },
                 "title": "OSSMeterProjects",
-                "uiStateJSON": "{\n  \"vis\": {\n    \"params\": {\n      \"sort\": {\n        \"columnIndex\": null,\n        \"direction\": null\n      }\n    }\n  }\n}",
+                "uiStateJSON": "{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}}",
                 "version": 1,
-                "visState": "{\n  \"title\": \"OSSMeterProjects\",\n  \"type\": \"table\",\n  \"params\": {\n    \"perPage\": 10,\n    \"showPartialRows\": false,\n    \"showMeticsAtAllLevels\": false,\n    \"sort\": {\n      \"columnIndex\": null,\n      \"direction\": null\n    },\n    \"showTotal\": false,\n    \"totalFunc\": \"sum\"\n  },\n  \"aggs\": [\n    {\n      \"id\": \"1\",\n      \"enabled\": true,\n      \"type\": \"count\",\n      \"schema\": \"metric\",\n      \"params\": {}\n    },\n    {\n      \"id\": \"2\",\n      \"enabled\": true,\n      \"type\": \"terms\",\n      \"schema\": \"bucket\",\n      \"params\": {\n        \"field\": \"project.keyword\",\n        \"size\": 100,\n        \"order\": \"desc\",\n        \"orderBy\": \"1\"\n      }\n    }\n  ],\n  \"listeners\": {}\n}"
+                "visState": "{\"title\":\"OSSMeterProjects\",\"type\":\"table\",\"params\":{\"perPage\":10,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false,\"sort\":{\"columnIndex\":null,\"direction\":null},\"showTotal\":false,\"totalFunc\":\"sum\"},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{\"customLabel\":\"Samples\"}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"project.keyword\",\"size\":100,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}"
             }
         },
         {
@@ -110,7 +110,7 @@
                 "title": "OSSMeterMetricESName",
                 "uiStateJSON": "{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}}",
                 "version": 1,
-                "visState": "{\"title\":\"OSSMeterMetricESName\",\"type\":\"table\",\"params\":{\"perPage\":15,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false,\"sort\":{\"columnIndex\":null,\"direction\":null},\"showTotal\":false,\"totalFunc\":\"sum\"},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"metric_es_name.keyword\",\"size\":10000,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}"
+                "visState": "{\"title\":\"OSSMeterMetricESName\",\"type\":\"table\",\"params\":{\"perPage\":15,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false,\"sort\":{\"columnIndex\":null,\"direction\":null},\"showTotal\":false,\"totalFunc\":\"sum\"},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{\"customLabel\":\"Samples\"}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"metric_es_name.keyword\",\"size\":10000,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}"
             }
         },
         {
@@ -150,6 +150,19 @@
                 "uiStateJSON": "{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}}",
                 "version": 1,
                 "visState": "{\"title\":\"OSSMeterMetricTopics\",\"type\":\"table\",\"params\":{\"perPage\":10,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false,\"sort\":{\"columnIndex\":null,\"direction\":null},\"showTotal\":false,\"totalFunc\":\"sum\"},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"topic.keyword\",\"size\":1000,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}"
+            }
+        },
+        {
+            "id": "AWAF5sfIWJ8CNnVirCt9",
+            "value": {
+                "description": "",
+                "kibanaSavedObjectMeta": {
+                    "searchSourceJSON": "{\"index\":\"ossmeter\",\"query\":{\"match_all\":{}},\"filter\":[]}"
+                },
+                "title": "OSSMeterMetricValueGlobal",
+                "uiStateJSON": "{\"vis\":{\"defaultColors\":{\"0 - 100\":\"rgb(0,104,55)\"}}}",
+                "version": 1,
+                "visState": "{\"title\":\"OSSMeterMetricValueGlobal\",\"type\":\"metric\",\"params\":{\"addTooltip\":true,\"addLegend\":false,\"type\":\"gauge\",\"gauge\":{\"verticalSplit\":false,\"autoExtend\":false,\"percentageMode\":false,\"gaugeType\":\"Metric\",\"gaugeStyle\":\"Full\",\"backStyle\":\"Full\",\"orientation\":\"vertical\",\"colorSchema\":\"Green to Red\",\"gaugeColorMode\":\"None\",\"useRange\":false,\"colorsRange\":[{\"from\":0,\"to\":100}],\"invertColors\":false,\"labels\":{\"show\":true,\"color\":\"black\"},\"scale\":{\"show\":true,\"labels\":false,\"color\":\"#333\",\"width\":2},\"type\":\"simple\",\"style\":{\"fontSize\":\"20\",\"bgColor\":false,\"labelColor\":false,\"subText\":\"\"}}},\"aggs\":[{\"id\":\"2\",\"enabled\":true,\"type\":\"max\",\"schema\":\"metric\",\"params\":{\"field\":\"metric_es_value\",\"customLabel\":\"Max\"}},{\"id\":\"3\",\"enabled\":true,\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"metric_es_value\",\"customLabel\":\"Average\"}},{\"id\":\"5\",\"enabled\":true,\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"metric_es_value\",\"customLabel\":\"Sum\"}},{\"id\":\"4\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{\"customLabel\":\"Samples\"}}],\"listeners\":{}}"
             }
         }
     ]
