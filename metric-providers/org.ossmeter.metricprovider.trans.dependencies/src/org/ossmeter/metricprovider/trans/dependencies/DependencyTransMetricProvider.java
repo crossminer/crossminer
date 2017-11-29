@@ -150,7 +150,7 @@ public class DependencyTransMetricProvider implements ITransientMetricProvider<C
 								db.getDependencies().add(dependency);
 							}
 						} catch (Exception e) {
-							logger.info("importing pom dependencies");
+							logger.error("importing pom dependencies");
 						}
 						db.sync();
 					}
@@ -169,10 +169,10 @@ public class DependencyTransMetricProvider implements ITransientMetricProvider<C
 		List<String> result = new ArrayList<>();
 		for (File gradleFile : gradlePath) {
 			try {
-				String valueDecoded = new String(Files.readAllBytes(Paths.get(gradleFile.getPath())));
+				String gradleFileContents = new String(Files.readAllBytes(Paths.get(gradleFile.getPath())));
 				
 				AstBuilder builder = new AstBuilder();
-			    List<ASTNode> nodes = builder.buildFromString(valueDecoded);
+			    List<ASTNode> nodes = builder.buildFromString(gradleFileContents);
 			    DependencyVisitor visitor = new DependencyVisitor();
 		        walkScript(visitor, nodes );
 		        
@@ -222,9 +222,9 @@ public class DependencyTransMetricProvider implements ITransientMetricProvider<C
 		for (File pomFile : pomFiles) {
 			try {
 
-				String valueDecoded = new String(Files.readAllBytes(Paths.get(pomFile.getPath())));
+				String pomFileContents = new String(Files.readAllBytes(Paths.get(pomFile.getPath())));
 				MavenXpp3Reader reader = new MavenXpp3Reader();
-				Model model = reader.read(new StringReader(valueDecoded));
+				Model model = reader.read(new StringReader(pomFileContents));
 
 				for (Dependency repositoryContents : model.getDependencies()) {
 					result.add(repositoryContents.getGroupId() + ":" + repositoryContents.getArtifactId());

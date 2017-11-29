@@ -4,7 +4,7 @@
 		{
 			"id" : "dependencies",
 			"name" : "Container",
-			"description" : "The list of gradle dependencies.",
+			"description" : "List of dependencies.",
 			"type" : "LineChart",
 			"datatable" : {
 				"row" : "stargazers",
