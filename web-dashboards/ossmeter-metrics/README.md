@@ -30,17 +30,19 @@ Add two projects using the web interface with the GitHub urls:
 
 You will need around 4h to collect the initial version of all metrics.
 
-To avoid this process, an all ready populated MongoDB database is included in:
+To avoid this process, a dump of an all ready populated MongoDB database is included in:
 
-`data/gelk-perceval-mongodb.tar.bz2`
+`data/mongo-ossmeter-dump.tgz`
 
 To use it:
 
 ```
 docker-compose -f docker/ossmeter.yml stop
 sudo rm -rf ~/oss-data/*
-sudo tar xfj data/gelk-perceval-mongodb.tar.bz2 -C ~/oss-data/ --strip-components=3
-docker-compose -f docker/ossmeter.yml start oss-db
+sudo tar xfj data/mongo-ossmeter-dump.tgz
+docker-compose -f docker/ossmeter.yml up oss-db
+mongorestore dump
+rm -rf dump
 ```
 
 With mongodb populated with metrics data let's process the metrics so they
