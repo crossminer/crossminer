@@ -298,6 +298,7 @@ def fetch_mongodb_collection(collection_str, host=None, port=None, client=None):
             eitem.update(item_meta)
             yield eitem
 
+
 if __name__ == '__main__':
 
     ARGS = get_params()
