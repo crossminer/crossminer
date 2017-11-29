@@ -30,6 +30,7 @@ import logging
 
 from grimoire_elk.elk.elastic import ElasticSearch
 
+
 def get_params():
     desc_help = 'Import JSON items with CROSSMINER dependencies in ElasticSearch'
     parser = argparse.ArgumentParser(usage="usage:dependencies2es [options]",
@@ -79,6 +80,7 @@ def uuid(*args):
 
     return uuid_sha1
 
+
 def find_version(dependency):
 
     version = None
@@ -112,6 +114,7 @@ def get_unique_id(dependency):
         uuid_val = uuid(dependency[0], dependency[1])
 
     return uuid_val
+
 
 def enrich_item(item):
     eitem = {}
