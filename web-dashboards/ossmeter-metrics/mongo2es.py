@@ -28,11 +28,10 @@ import argparse
 import hashlib
 import logging
 
-from pprint import pprint
-
 from pymongo import MongoClient
 
 from grimoire_elk.elk.elastic import ElasticSearch
+
 
 def get_params():
     parser = argparse.ArgumentParser(usage="usage: mongo2es [options]",
@@ -51,6 +50,7 @@ def get_params():
         parser.error("--collection or --all-collections needed")
 
     return args
+
 
 # From perceval
 def uuid(*args):
@@ -83,6 +83,7 @@ def uuid(*args):
 
     return uuid_sha1
 
+
 def connect_to_mongo(host=None, port=None):
     """ Return a connection to the mongo server in host and port """
     if host and port:
@@ -93,6 +94,7 @@ def connect_to_mongo(host=None, port=None):
         client = MongoClient()
 
     return client
+
 
 def is_ossmeter_historic_collection(collection):
     # Check if a collection is an OSSMeter historic one
@@ -105,6 +107,7 @@ def is_ossmeter_historic_collection(collection):
             is_historic = True
 
     return is_historic
+
 
 def is_ossmeter_project_collection(project, collection):
     # Check if a collection is an OSSMeter one from project
@@ -132,6 +135,7 @@ def fetch_mongodb_all(host=None, port=None):
                 logging.info('Loading items from %s', collection_name)
                 for item in fetch_mongodb_collection(collection_name, client=client):
                     yield item
+
 
 def fetch_mongodb_project(project, host=None, port=None):
     logging.info("Searching OSSMeter metrics collections for project %s", project)
@@ -196,7 +200,6 @@ def extract_metrics(item, item_meta):
                 metric_prefix = item[field]
 
         return metric_prefix
-
 
     item_metrics = []
 
