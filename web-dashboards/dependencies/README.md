@@ -17,7 +17,6 @@ Elasticsearch needs this config:
 The contents of the `docker-compose.yml` file to be used is:
 
 ```
-cat docker-compose.yml
 elasticsearch:
   image: bitergia/elasticsearch:5.6.0
   command: /elasticsearch/bin/elasticsearch -E network.bind_host=0.0.0.0
