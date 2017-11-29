@@ -141,6 +141,7 @@ def fetch_dependencies(dependencies_file, project=None):
             eitem['project'] = project
             yield eitem
 
+
 if __name__ == '__main__':
 
     args = get_params()
