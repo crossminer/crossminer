@@ -10,64 +10,16 @@ The OSSMeter metrics dashboard shows all metrics collected by OSSMeter platform 
 * Topic
 
 
-## Start Elasticsearch and Kibana services
+## Install
 
-Please follow this section in the dependencies dashboard.
+The first step is to create a [OSSMETER mongodb database with data from projects](/web-dashboards#init-ossmeter-mongodb-with-grimoirelab-data).
 
-## Start OSSMeter services
-
-In order to collect the metrics with OSSMeter the best approach is to
-use the docker compose which starts the full platform:
-
-`docker-compose -f docker/ossmeter.yml up`
-
-[Create a initial user](https://github.com/ossmeter/ossmeter/wiki/FAQ#adding-the-first-user-in-the-local-web-application) to access OSSMeter.
-
-Add two projects using the web interface with the GitHub urls:
-
-* https://github.com/grimoirelab/perceval
-* https://github.com/grimoirelab/grimoire_elk
-
-You will need around 4h to collect the initial version of all metrics.
-
-To avoid this process, a dump of an all ready populated MongoDB database is included in:
-
-`data/mongo-ossmeter-dump.tgz`
-
-To use it:
-
-```
-docker-compose -f docker/ossmeter.yml stop
-sudo rm -rf ~/oss-data/*
-sudo tar xfj data/mongo-ossmeter-dump.tgz
-docker-compose -f docker/ossmeter.yml up oss-db
-mongorestore dump
-rm -rf dump
-```
+[Elasticsearch and Kibana will be needed also](/web-dashboards#install-elasticsearch-and-kibana).
 
 With mongodb populated with metrics data let's process the metrics so they
 can be used in Kibana.
 
-
-## Install
-
-The data processing is done with GrimoireLab python platform.
-
-A virtual env in Python is used to install the tools needed.
-
-In Debian/Ubuntu you need to execute:
-
-`sudo apt-get install python3-venv`
-
-To create the python virtualenv and activate it:
-
-```
-mkdir ~/venvs
-python3 -m venv ~/venvs/crossminer
-source ~/venvs/crossminer/bin/activate
-pip3 install grimoire-elk
-```
-
+The data processing is done with [GrimoireLab python platform](/web-dashboards#install-grimoirelab-python-env). Inside the python env execute.
 
 
 Now the tool can be executed with:
