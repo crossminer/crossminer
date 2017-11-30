@@ -12,7 +12,7 @@ The OSSMeter metrics dashboard shows all metrics collected by OSSMeter platform 
 
 ## Install
 
-The first step is to create a [OSSMETER mongodb database with data from projects](/web-dashboards#install-ossmeter-services).
+The first step is to create a [OSSMETER mongodb database with data from projects](/web-dashboards#init-ossmeter-mongodb-with-grimoirelab-data).
 
 [Elasticsearch and Kibana will be needed also](/web-dashboards#install-elasticsearch-and-kibana).
 

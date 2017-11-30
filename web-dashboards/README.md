@@ -106,8 +106,8 @@ To use it:
 ```
 docker-compose -f docker/ossmeter.yml stop
 sudo rm -rf ~/oss-data/*
-sudo tar xfj data/mongo-ossmeter-dump.tgz
-docker-compose -f docker/ossmeter.yml up oss-db
+tar xfz data/mongo-ossmeter-dump.tgz
+docker-compose -f docker/ossmeter.yml up -d oss-db
 mongorestore dump
 rm -rf dump
 ```
