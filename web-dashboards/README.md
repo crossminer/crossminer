@@ -84,7 +84,7 @@ To start both services:
 In order to collect the metrics with OSSMeter the best approach is to
 use the docker compose which starts the full platform:
 
-`docker-compose -f docker/ossmeter.yml up`
+`docker-compose -f web-dashboards/docker/ossmeter.yml up`
 
 [Create a initial user](https://github.com/ossmeter/ossmeter/wiki/FAQ#adding-the-first-user-in-the-local-web-application) to access OSSMeter.
 
@@ -104,10 +104,10 @@ To avoid the above process (4h), a dump of an all ready populated MongoDB databa
 To use it:
 
 ```
-docker-compose -f docker/ossmeter.yml stop
+docker-compose -f web-dashboards/docker/ossmeter.yml stop
 sudo rm -rf ~/oss-data/*
-tar xfz data/mongo-ossmeter-dump.tgz
-docker-compose -f docker/ossmeter.yml up -d oss-db
+tar xfz web-dashboards/data/mongo-ossmeter-dump.tgz
+docker-compose -f web-dashboards/docker/ossmeter.yml up -d oss-db
 mongorestore dump
 rm -rf dump
 ```
