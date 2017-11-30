@@ -95,7 +95,9 @@ Add two projects using the web interface with the GitHub urls:
 
 You will need around 4h to collect the initial version of all metrics.
 
-To avoid this process, a dump of an all ready populated MongoDB database is included in:
+### Init OSSMeter MongoDB with GrimoireLab data
+
+To avoid the above process (4h), a dump of an all ready populated MongoDB database is included in:
 
 `data/mongo-ossmeter-dump.tgz`
 
