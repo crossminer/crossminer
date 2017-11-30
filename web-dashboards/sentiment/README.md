@@ -24,7 +24,7 @@ In order to share the filters between OSSMeter item metrics and GrimoireLab item
 
 And now the Kibana panel can be imported to show the data:
 
-`kidash.py -e http://bitergia:bitergia@localhost:9200 --import web-dashboards/sentiment/panels/perceval_bugs_emotion_fear.json ``
+`kidash.py -e http://bitergia:bitergia@localhost:9200 --import web-dashboards/sentiment/panels/perceval_bugs_emotion_fear.json `
 
 The panel is ready at the URL:
 
