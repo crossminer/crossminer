@@ -20,11 +20,11 @@ p2o.py --enrich -e http://bitergia:bitergia@localhost:9200 --index grimoirelab_g
 
 In order to share the filters between OSSMeter item metrics and GrimoireLab items, the filters must be added to GrimoireLab items. This is done with:
 
-`./os4gl.py -g -e http://bitergia:bitergia@localhost:9200 --ossmeter-index ossmeter --grimoirelab-index grimoirelab_github -o grimoirelab_github_oss`
+`web-dashboards/ossmeter-metrics/os4gl.py -g -e http://bitergia:bitergia@localhost:9200 --ossmeter-index ossmeter --grimoirelab-index grimoirelab_github -o grimoirelab_github_oss`
 
 And now the Kibana panel can be imported to show the data:
 
-`kidash.py -e http://bitergia:bitergia@localhost:9200 --import panels/fear_bugs_emotion.json`
+`kidash.py -e http://bitergia:bitergia@localhost:9200 --import web-dashboards/sentiment/panels/perceval_bugs_emotion_fear.json ``
 
 The panel is ready at the URL:
 
