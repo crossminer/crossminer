@@ -13,7 +13,7 @@ package org.ossmeter.metricprovider.historic.bugs.opentime;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.lang.time.DurationFormatUtils;
+import org.apache.commons.lang3.time.DurationFormatUtils;
 import org.ossmeter.metricprovider.historic.bugs.opentime.model.BugsOpenTimeHistoricMetric;
 import org.ossmeter.metricprovider.trans.bugs.bugmetadata.BugMetadataTransMetricProvider;
 import org.ossmeter.metricprovider.trans.bugs.bugmetadata.model.BugData;
