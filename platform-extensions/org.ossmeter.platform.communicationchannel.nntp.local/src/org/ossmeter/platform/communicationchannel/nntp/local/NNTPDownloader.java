@@ -10,7 +10,7 @@
  *******************************************************************************/
 package org.ossmeter.platform.communicationchannel.nntp.local;
 
-import org.apache.commons.lang.time.DurationFormatUtils;
+import org.apache.commons.lang3.time.DurationFormatUtils;
 import org.apache.commons.net.nntp.Article;
 import org.apache.commons.net.nntp.NNTPClient;
 import org.apache.commons.net.nntp.NewsgroupInfo;
