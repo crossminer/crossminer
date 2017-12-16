@@ -47,6 +47,9 @@ import org.ossmeter.platform.MetricProviderContext;
 import org.ossmeter.platform.Platform;
 import org.ossmeter.platform.delta.ProjectDelta;
 import org.ossmeter.platform.delta.vcs.IVcsManager;
+import org.ossmeter.platform.delta.vcs.VcsCommit;
+import org.ossmeter.platform.delta.vcs.VcsProjectDelta;
+import org.ossmeter.platform.delta.vcs.VcsRepositoryDelta;
 import org.ossmeter.platform.logging.OssmeterLogger;
 import org.ossmeter.platform.vcs.workingcopy.manager.WorkingCopyCheckoutException;
 import org.ossmeter.platform.vcs.workingcopy.manager.WorkingCopyFactory;
@@ -118,6 +121,14 @@ public class DependencyTransMetricProvider implements ITransientMetricProvider<C
 		try {
 			db.getDependencies().getDbCollection().drop();
 			db.sync();
+			//TODO riprendere qui
+//			for (VcsRepositoryDelta repoDelta : delta.getVcsDelta().getRepoDeltas()) {
+//				repoDelta.getRepository().getUrl();
+//				for (VcsCommit commit : repoDelta.getCommits()) {
+//					System.out.println(commit);
+//				}
+//			}
+			
 			
 			List<IVcsManager> d = Platform.getInstance().getVcsManager().getVcsManagers();
 			for (IVcsManager iVcsManager : d) {
@@ -198,14 +209,14 @@ public class DependencyTransMetricProvider implements ITransientMetricProvider<C
 		if (rootFolder.isDirectory())
 			result.addAll(Arrays.asList(rootFolder.listFiles(new FilenameFilter() {
 				public boolean accept(File dir, String filename) {
-					File f = new File(dir.getAbsolutePath()+ "/" + filename);
-					return filename.toLowerCase().equals(fileName) && !f.isDirectory();
+					File file = new File(dir.getAbsolutePath()+ "/" + filename);
+					return filename.toLowerCase().equals(fileName) && !file.isDirectory();
 				}
 			})));
 		List<File> listFolder = Arrays.asList(rootFolder.listFiles(new FilenameFilter() {
 			public boolean accept(File dir, String filename) {
-				File f = new File(dir.getAbsolutePath() + File.separator + filename);
-				return f.isDirectory();
+				File file = new File(dir.getAbsolutePath() + File.separator + filename);
+				return file.isDirectory();
 			}
 		}));
 		for (File file : listFolder) {
@@ -283,11 +294,11 @@ public class DependencyTransMetricProvider implements ITransientMetricProvider<C
 		DefaultRepositorySystemSession session = MavenRepositorySystemUtils.newSession();
 		LocalRepository localRepo = new LocalRepository("target/local-repo");
 		session.setLocalRepositoryManager(system.newLocalRepositoryManager(session, localRepo));
-		// set possible proxies and mirrors
-		session.setProxySelector(new DefaultProxySelector().add(new Proxy(Proxy.TYPE_HTTP, "host", 3625),
-				Arrays.asList("localhost", "127.0.0.1")));
-		session.setMirrorSelector(
-				new DefaultMirrorSelector().add("my-mirror", "http://mirror", "default", false, "external:*", null));
+//		// set possible proxies and mirrors
+//		session.setProxySelector(new DefaultProxySelector().add(new Proxy(Proxy.TYPE_HTTP, "host", 3625),
+//				Arrays.asList("localhost", "127.0.0.1")));
+//		session.setMirrorSelector(
+//				new DefaultMirrorSelector().add("my-mirror", "http://mirror", "default", false, "external:*", null));
 		return session;
 	}
 
