@@ -10,8 +10,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.apache.commons.net,
  org.ossmeter.repository.model.cc.nntp,
  javax.mail,
- org.apache.commons.lang,
- org.ossmeter.repository.model
+ org.ossmeter.repository.model,
+ org.apache.commons.lang3
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: org.ossmeter.platform.communicationchannel.nntp.local,
