@@ -17,9 +17,9 @@ package test.library;
 import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.crossminer.commons.library.Library;
-import org.crossminer.commons.library.ReleaseType;
-import org.crossminer.commons.library.Version;
+import org.crossmeter.commons.library.Library;
+import org.crossmeter.commons.library.ReleaseType;
+import org.crossmeter.commons.library.Version;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

@@ -16,7 +16,7 @@ package test.library;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.crossminer.commons.library.ReleaseType;
+import org.crossmeter.commons.library.ReleaseType;
 import org.junit.jupiter.api.Test;
 
 

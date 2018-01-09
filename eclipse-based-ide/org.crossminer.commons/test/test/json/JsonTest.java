@@ -16,10 +16,10 @@ package test.json;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.crossminer.commons.json.Json;
-import org.crossminer.commons.library.Library;
-import org.crossminer.commons.library.ReleaseType;
-import org.crossminer.commons.library.Version;
+import org.crossmeter.commons.json.Json;
+import org.crossmeter.commons.library.Library;
+import org.crossmeter.commons.library.ReleaseType;
+import org.crossmeter.commons.library.Version;
 import org.junit.jupiter.api.Test;
 
 class JsonTest {

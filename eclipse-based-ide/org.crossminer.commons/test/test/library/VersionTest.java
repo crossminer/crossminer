@@ -16,7 +16,7 @@ package test.library;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.crossminer.commons.library.Version;
+import org.crossmeter.commons.library.Version;
 import org.junit.jupiter.api.Test;
 
 class VersionTest {

@@ -18,10 +18,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
-import org.crossminer.commons.context.sourcecode.SourceCodeContext;
-import org.crossminer.commons.context.sourcecode.lineinfo.LineInfo;
-import org.crossminer.commons.context.sourcecode.lineinfo.detail.ASTDetailKind;
-import org.crossminer.commons.context.sourcecode.lineinfo.detail.ASTDetailTypeName;
+import org.crossmeter.commons.context.sourcecode.SourceCodeContext;
+import org.crossmeter.commons.context.sourcecode.lineinfo.LineInfo;
+import org.crossmeter.commons.context.sourcecode.lineinfo.detail.ASTDetailKind;
+import org.crossmeter.commons.context.sourcecode.lineinfo.detail.ASTDetailTypeName;
 import org.junit.jupiter.api.Test;
 
 class SourceCodeContextTest {

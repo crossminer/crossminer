@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bundle-SymbolicName: Crossminer Commons
-Bundle-Name: Crossminer Commons
+Bundle-SymbolicName: Crossmeter Commons
+Bundle-Name: Crossmeter Commons
 Bundle-Version: 0.1
 
