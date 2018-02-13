@@ -25,6 +25,7 @@ public interface IRecommenderManager {
 	Recommendation getRecommendation(Query query, List<IRecommendationProvider> providers);
 	List<Cluster> getClusters(String similarityName);
 	List<Artifact> getSimilarProjects(String projectId, String similarityFunction, int numOfResult);
+	List<Artifact> getArtifactsByQuery(String projectQuery);
 	
 	
 }

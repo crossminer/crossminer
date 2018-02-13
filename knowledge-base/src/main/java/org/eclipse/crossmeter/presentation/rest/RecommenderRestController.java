@@ -9,13 +9,10 @@
  ******************************************************************************/
 package org.eclipse.crossmeter.presentation.rest;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.crossmeter.business.IRecommenderManager;
 import org.eclipse.crossmeter.business.ISimilarityCalculator;
-import org.eclipse.crossmeter.business.ISimilarityManager;
-import org.eclipse.crossmeter.business.dto.Dependency;
 import org.eclipse.crossmeter.business.dto.Query;
 import org.eclipse.crossmeter.business.dto.Recommendation;
 import org.eclipse.crossmeter.business.integration.ArtifactRepository;
@@ -71,5 +68,10 @@ public class RecommenderRestController {
     		@PathVariable("num") int num) {
 		
 		return recommenderManager.getSimilarProjects(id, simFunction, num);
+    }
+	
+	@RequestMapping(value="search/{artifact_query}", produces = "application/json")
+    public List<Artifact> getProject(@PathVariable("artifact_query") String projectQuery) {
+		return recommenderManager.getArtifactsByQuery(projectQuery);
     }
 }

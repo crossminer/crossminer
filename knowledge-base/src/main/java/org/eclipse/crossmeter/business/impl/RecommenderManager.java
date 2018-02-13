@@ -26,13 +26,19 @@ import org.eclipse.crossmeter.business.integration.ArtifactRepository;
 import org.eclipse.crossmeter.business.model.Artifact;
 import org.eclipse.crossmeter.business.model.Cluster;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.index.TextIndexDefinition;
+import org.springframework.data.mongodb.core.query.TextCriteria;
+import org.springframework.data.mongodb.core.query.TextQuery;
 import org.springframework.stereotype.Service;
+
 /**
  * @author Juri Di Rocco
  *
  */
 @Service
-public class RecommenderManager implements IRecommenderManager{
+public class RecommenderManager implements IRecommenderManager {
 
 	private static final Logger logger = Logger.getLogger(RecommenderManager.class);
 	@Autowired
@@ -46,11 +52,15 @@ public class RecommenderManager implements IRecommenderManager{
 	private IClusterManager clusterManager;
 	@Autowired
 	private ISimilarityManager similarityManager;
+	@Autowired
+	private MongoTemplate template;
+
 	@Override
 	public Recommendation getRecommendation(Query query) throws Exception {
 		HashMap<String, Object> params = new HashMap<>();
-		return recommendationProvider.getRecommendation(query, params);			
+		return recommendationProvider.getRecommendation(query, params);
 	}
+
 	@Override
 	public List<Cluster> getClusters(String similarityName) {
 		try {
@@ -59,9 +69,9 @@ public class RecommenderManager implements IRecommenderManager{
 			return new ArrayList<>();
 		}
 	}
-	
+
 	@Override
-	public List<Artifact> getSimilarProjects(String projectId, String similarityFunction, int numOfResult){
+	public List<Artifact> getSimilarProjects(String projectId, String similarityFunction, int numOfResult) {
 		Artifact p1 = artifactRepository.findOne(projectId);
 		try {
 			return similarityManager.getSimilarProjects(p1, getSimilarityCalculator(similarityFunction), numOfResult);
@@ -77,9 +87,24 @@ public class RecommenderManager implements IRecommenderManager{
 	}
 
 	private ISimilarityCalculator getSimilarityCalculator(String similarityMethod) throws Exception {
-		Optional<ISimilarityCalculator> a = similarityFunction.stream().filter(z -> z.getSimilarityName().equals(similarityMethod)).findFirst();
+		Optional<ISimilarityCalculator> a = similarityFunction.stream()
+				.filter(z -> z.getSimilarityName().equals(similarityMethod)).findFirst();
 		if (a.isPresent())
 			return a.get();
-		else throw new Exception("similarity method " + similarityMethod + " is unavailable");
+		else
+			throw new Exception("similarity method " + similarityMethod + " is unavailable");
+	}
+
+	@Override
+	public List<Artifact> getArtifactsByQuery(String projectQuery) {
+		
+		TextCriteria criteria = TextCriteria.forDefaultLanguage().matchingPhrase(projectQuery);
+
+		org.springframework.data.mongodb.core.query.Query query = TextQuery.queryText(criteria).sortByScore()
+				.with(new PageRequest(0, 5));
+
+		List<Artifact> recipes = template.find(query, Artifact.class);
+		
+		return recipes;
 	}
 }

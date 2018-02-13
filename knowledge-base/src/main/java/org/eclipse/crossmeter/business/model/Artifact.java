@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.TextIndexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -20,21 +23,29 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * @author Juri Di Rocco
  *
  */
+@Document
 public class Artifact {
 
 	private boolean hasPomFiles;
 	@Id
 	private String id;
 	private List<Tag> tags;
-	private String name;
-	private String shortName;
-	private String description;
+	
+	@TextIndexed(weight=4)
+	String name;
+	@TextIndexed(weight=3)
+	String shortName;
+	@TextIndexed(weight=1)
+	String description;
+	@TextIndexed(weight=4)
+	String fullName;
+	
 	private int year;
 	private boolean active = true;
 	private String homePage;
+	@DBRef
 	private List<Artifact> subArtifacts;
 	private ArtifactType type;
-	private String fullName;
 	private Boolean private_;
 	private Boolean fork;
 	private String html_url;
@@ -48,6 +59,7 @@ public class Artifact {
 	private List<GithubUser> committeers = new ArrayList<>();
 	private String readmeText;
 	private List<String> dependencies = new ArrayList<>(); 
+	@JsonIgnore
 	private List<Stargazers> starred = new ArrayList<>();
 	public String getFullName() {
 		return fullName;
