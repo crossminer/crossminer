@@ -256,7 +256,6 @@ public class GithubImporter implements IImporter {
 	public void importAll() {
 		String jsonText = null;
 
-
 		int startStar = 20;
 		int stopStar = 120;
 		
@@ -398,6 +397,7 @@ public class GithubImporter implements IImporter {
 			throws IOException, XmlPullParserException, InterruptedException {
 		List<String> mavenDeps = getMavenDependencies(client, rep);
 		List<String> gradleDeps = getGradleDependencies(client, rep);
+		
 		mavenDeps.addAll(gradleDeps);
 		return mavenDeps; 
 	}
@@ -565,6 +565,116 @@ public class GithubImporter implements IImporter {
 
 	}
 
+	
+	private List<String> getOSGiDependencies(GitHubClient client, Repository rep) 
+			throws MalformedURLException, IOException, InterruptedException {
+		String repoFullName = rep.getOwner().getLogin() + "/" + rep.getName();
+		List<String> manifestPaths = getGithubFilePath("MANIFEST.MF", repoFullName);
+		return getOSGiDependencies(client, rep, manifestPaths);
+	}
+	
+	private List<String> getOSGiDependencies(GitHubClient client, Repository rep, List<String> manifestPaths) {
+		List<String> result = new ArrayList<String>();
+		// Creates a service for accessing the content of a repository.
+		ContentsService contentService = new ContentsService(client);
+		
+		try {
+			for(String path : manifestPaths) {
+				List<RepositoryContents> pathContent = contentService.getContents(rep, path);
+				String valueDecoded = "";
+				
+				for(RepositoryContents content : pathContent) {
+					String contentString = content.getContent();
+					valueDecoded += new String(Base64.decodeBase64(contentString.getBytes()))
+						+ System.getProperty("line.separator");
+				}
+			}
+		}
+		catch (IOException e) {
+			logger.error(e.getMessage());
+		}
+		
+//		List<String> result = new ArrayList<>();
+//		ContentsService contentService = new ContentsService(client);
+//		for (String pomFile : pomFiles) {
+//			try {
+//
+//				List<RepositoryContents> test = contentService.getContents(rep, pomFile);
+//				String valueDecoded = "";
+//				for (RepositoryContents content : test) {
+//					String fileConent = content.getContent();
+//					valueDecoded = new String(Base64.decodeBase64(fileConent.getBytes()));
+//					valueDecoded += System.getProperty("line.separator");
+//				}
+//
+//				MavenXpp3Reader reader = new MavenXpp3Reader();
+//				Model model = reader.read(new StringReader(valueDecoded));
+//
+//				for (Dependency repositoryContents : model.getDependencies()) {
+//					result.add(repositoryContents.getGroupId() + ":" + repositoryContents.getArtifactId());
+//
+//				}
+//				if (model.getDependencyManagement() != null)
+//					for (Dependency repositoryContents : model.getDependencyManagement().getDependencies()) {
+//						result.add(repositoryContents.getGroupId() + ":" + repositoryContents.getArtifactId());
+//					}
+//				if (model.getParent() != null) {
+//					String parent = model.getParent().getGroupId() + ":" + model.getParent().getArtifactId() + ":"
+//							+ model.getParent().getVersion();
+//					try {
+//						List<String> deps;
+//						deps = getMavenParentDependencies(parent);
+//						result.addAll(deps);
+//					} catch (DependencyResolutionException | ArtifactDescriptorException e) {
+//						logger.error(e.getMessage());
+//					}
+//				}
+//			} catch (XmlPullParserException | IOException e) {
+//				logger.error(e.getMessage());
+//			} 
+//		}
+		return result;
+	}
+	
+	private List<String> getGithubFilePath(String fileName, String repoName) 
+			throws MalformedURLException, IOException, InterruptedException {
+		List<String> paths = new ArrayList<String>();
+		InputStream stream = null;
+		
+		try {
+			// Search the file in Github.
+			stream = new URL("https://api.github.com/search/code?q=filename:" + fileName
+					+ "+repo:" + repoName 
+					+ "&access_token=" + this.token).openStream();
+		}
+		catch(Exception e) {
+			// Wait in case of exception
+			Thread.sleep(60000);
+			// And try again
+			stream = new URL("https://api.github.com/search/code?q=filename:MANIFEST.MF+repo:" 
+					+ repoName 
+					+ "&access_token="
+					+ this.token).openStream();
+		}
+		
+		// Read content from the search result.
+		BufferedReader reader = new BufferedReader(new InputStreamReader(stream, Charset.forName(UTF8)));
+		String resultsString = readAll(reader);
+		JSONObject resultsJSON = (JSONObject) JSONValue.parse(resultsString);
+		
+		// Check all file results
+		long resultsTotal = (long) resultsJSON.get("total_count");
+		if(resultsTotal > 0) {
+			JSONArray files = (JSONArray) resultsJSON.get("items");
+			for(Object file : files) {
+				JSONObject fileJSON = (JSONObject) file;
+				paths.add((String) fileJSON.get("path")); 
+			}
+		}
+		
+		return paths;
+	}
+	
 	/*
 	 * newSession: relates to pom files and depedecieOs
 	 */
