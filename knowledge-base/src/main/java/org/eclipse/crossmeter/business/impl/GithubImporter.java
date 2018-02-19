@@ -63,6 +63,8 @@ import org.eclipse.crossmeter.business.integration.GithubUserRepository;
 import org.eclipse.crossmeter.business.model.Artifact;
 import org.eclipse.crossmeter.business.model.GithubUser;
 import org.eclipse.crossmeter.business.model.Stargazers;
+import org.eclipse.crossmeter.business.rascal.RascalBridge;
+import org.eclipse.crossmeter.business.rascal.impl.JavaRascalBridge;
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.RepositoryContents;
 import org.eclipse.egit.github.core.RepositoryId;
@@ -397,8 +399,11 @@ public class GithubImporter implements IImporter {
 			throws IOException, XmlPullParserException, InterruptedException {
 		List<String> mavenDeps = getMavenDependencies(client, rep);
 		List<String> gradleDeps = getGradleDependencies(client, rep);
+		List<String> osgiDependencies = getOSGiDependencies(client, rep);
 		
 		mavenDeps.addAll(gradleDeps);
+		mavenDeps.addAll(osgiDependencies);
+		
 		return mavenDeps; 
 	}
 	private List<String> getGradleDependencies(GitHubClient client, Repository rep) 
@@ -593,6 +598,8 @@ public class GithubImporter implements IImporter {
 		catch (IOException e) {
 			logger.error(e.getMessage());
 		}
+		
+		RascalBridge bridge = new JavaRascalBridge();
 		
 //		List<String> result = new ArrayList<>();
 //		ContentsService contentService = new ContentsService(client);

@@ -25,6 +25,8 @@ import org.eclipse.crossmeter.business.impl.GithubImporter;
 import org.eclipse.crossmeter.business.integration.ArtifactRepository;
 import org.eclipse.crossmeter.business.model.Artifact;
 import org.eclipse.crossmeter.business.model.GithubUser;
+import org.eclipse.crossmeter.business.rascal.RascalBridge;
+import org.eclipse.crossmeter.business.rascal.impl.JavaRascalBridge;
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.User;
 import org.junit.After;
@@ -36,6 +38,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import io.usethesource.vallang.IString;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {Application.class})
@@ -66,5 +70,14 @@ public class GithubImporterTest {
 	public void importer() throws IOException, XmlPullParserException{
 		Artifact art = importer.importProject("pylerSM/Xinstaller");
 		assertNotNull(art);
+	}
+	@Test
+	public void testRascalBridge() {
+		RascalBridge bridge = new JavaRascalBridge();
+		String path = "file:///" + System.getProperty("user.dir") + "/src/";
+		IString hoi = (IString) bridge.callFunction(path, 
+				"test::java::org::eclipse::crossmeter::test::importer::RascalModuleTest", 
+				"testBridge");
+		assertEquals("Hello world!", hoi.getValue());
 	}
 }
