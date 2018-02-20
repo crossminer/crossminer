@@ -16,6 +16,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -74,10 +75,19 @@ import org.eclipse.egit.github.core.service.RepositoryService;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
+import org.rascalmpl.values.ValueFactoryFactory;
+import org.rascalmpl.values.uptr.IRascalValueFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import io.usethesource.vallang.IConstructor;
+import io.usethesource.vallang.IList;
+import io.usethesource.vallang.ISourceLocation;
+import io.usethesource.vallang.IString;
+import io.usethesource.vallang.IValue;
+import io.usethesource.vallang.IValueFactory;
 
 /**
  * @author Juri Di Rocco
@@ -89,6 +99,8 @@ public class GithubImporter implements IImporter {
 
 	@Value("${egit.github.token}")
 	private String token;
+	@Value("${rascal.api.module}")
+	private String module;
 	private static final String UTF8 = "UTF-8";
 	@Autowired
 	private GithubUserRepository userRepository;
@@ -593,53 +605,32 @@ public class GithubImporter implements IImporter {
 					valueDecoded += new String(Base64.decodeBase64(contentString.getBytes()))
 						+ System.getProperty("line.separator");
 				}
+				
+				RascalBridge bridge = new JavaRascalBridge();
+				IValueFactory factory = IRascalValueFactory.getInstance();
+				ISourceLocation moduleRoot = factory.sourceLocation("file","","/Users/ochoa/Documents/cwi/crossminer/code/osgi-analysis-rascal/code/DependenciesAnalyzer/src/");
+				ISourceLocation projectLoc = org.rascalmpl.uri.URIUtil.createFromURI(rep.getHtmlUrl());
+				
+				// Get OSGi model
+				IConstructor osgiModel = (IConstructor) bridge.callFunction(moduleRoot,module,"createSingleBundleOSGiModel",
+						new IValue[] {projectLoc,factory.string(valueDecoded)});
+				//Get required bundles and imported packages
+				IList requiredBundles = (IList) bridge.callFunction(moduleRoot,module,"getRequiredBundles", 
+						new IValue[] {projectLoc,osgiModel});
+				IList importedPackages = (IList) bridge.callFunction(moduleRoot,module,"getImportedPackages", 
+						new IValue[] {projectLoc,osgiModel});
+				
+				for(IValue r : requiredBundles) {
+					result.add(((IString) r).getValue());
+				}
+				for(IValue i : importedPackages) {
+					result.add(((IString) i).getValue());
+				}
 			}
 		}
-		catch (IOException e) {
+		catch (IOException | URISyntaxException e) {
 			logger.error(e.getMessage());
 		}
-		
-		RascalBridge bridge = new JavaRascalBridge();
-		
-//		List<String> result = new ArrayList<>();
-//		ContentsService contentService = new ContentsService(client);
-//		for (String pomFile : pomFiles) {
-//			try {
-//
-//				List<RepositoryContents> test = contentService.getContents(rep, pomFile);
-//				String valueDecoded = "";
-//				for (RepositoryContents content : test) {
-//					String fileConent = content.getContent();
-//					valueDecoded = new String(Base64.decodeBase64(fileConent.getBytes()));
-//					valueDecoded += System.getProperty("line.separator");
-//				}
-//
-//				MavenXpp3Reader reader = new MavenXpp3Reader();
-//				Model model = reader.read(new StringReader(valueDecoded));
-//
-//				for (Dependency repositoryContents : model.getDependencies()) {
-//					result.add(repositoryContents.getGroupId() + ":" + repositoryContents.getArtifactId());
-//
-//				}
-//				if (model.getDependencyManagement() != null)
-//					for (Dependency repositoryContents : model.getDependencyManagement().getDependencies()) {
-//						result.add(repositoryContents.getGroupId() + ":" + repositoryContents.getArtifactId());
-//					}
-//				if (model.getParent() != null) {
-//					String parent = model.getParent().getGroupId() + ":" + model.getParent().getArtifactId() + ":"
-//							+ model.getParent().getVersion();
-//					try {
-//						List<String> deps;
-//						deps = getMavenParentDependencies(parent);
-//						result.addAll(deps);
-//					} catch (DependencyResolutionException | ArtifactDescriptorException e) {
-//						logger.error(e.getMessage());
-//					}
-//				}
-//			} catch (XmlPullParserException | IOException e) {
-//				logger.error(e.getMessage());
-//			} 
-//		}
 		return result;
 	}
 	

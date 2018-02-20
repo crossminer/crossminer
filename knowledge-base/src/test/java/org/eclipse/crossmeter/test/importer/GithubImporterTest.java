@@ -10,6 +10,7 @@
 package org.eclipse.crossmeter.test.importer;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,11 +35,13 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.rascalmpl.values.uptr.IRascalValueFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import io.usethesource.vallang.ISourceLocation;
 import io.usethesource.vallang.IString;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -72,12 +75,17 @@ public class GithubImporterTest {
 		assertNotNull(art);
 	}
 	@Test
-	public void testRascalBridge() {
-		RascalBridge bridge = new JavaRascalBridge();
-		String path = "file:///" + System.getProperty("user.dir") + "/src/";
-		IString hoi = (IString) bridge.callFunction(path, 
+	public void importProjectOSGiTest() throws IOException {
+		Artifact art = importer.importProject("usethesource/rascal-eclipse/rascal-eclipse");
+		assertNotNull(art);
+	}
+	@Test
+	public void rascalBridgeTest() throws URISyntaxException {
+		RascalBridge bridge = new JavaRascalBridge();	
+		ISourceLocation moduleRoot = IRascalValueFactory.getInstance().sourceLocation("file","","/" + System.getProperty("user.dir") + "/src/");
+		IString val = (IString) bridge.callFunction(moduleRoot, 
 				"test::java::org::eclipse::crossmeter::test::importer::RascalModuleTest", 
 				"testBridge");
-		assertEquals("Hello world!", hoi.getValue());
+		assertEquals("Hello world!", val.getValue());
 	}
 }
