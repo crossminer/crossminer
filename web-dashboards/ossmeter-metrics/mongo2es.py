@@ -143,7 +143,7 @@ def fetch_mongodb_project(project, host=None, port=None):
 
     # Find all OSSMeter collections in mongo
     for db in client.database_names():
-        logging.info('Loading items from database %s', db)
+        logging.info('Checking items from database %s', db)
         for collection in client[db].collection_names():
             collection_name = db + '.' + collection
             if not is_ossmeter_historic_collection(collection_name):
@@ -196,6 +196,9 @@ def extract_metrics(item, item_meta):
                 # Topics are a special case and will be added as an extra field
                 continue
             if isinstance(item[field], str):
+                # If the string is url it is just the origin
+                if field == 'url':
+                    continue
                 # This is the name of the metric prefix: 'severityLevel': 'normal'}
                 metric_prefix = item[field]
 
