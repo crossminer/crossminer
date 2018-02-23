@@ -75,7 +75,6 @@ import org.eclipse.egit.github.core.service.RepositoryService;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
-import org.rascalmpl.values.ValueFactoryFactory;
 import org.rascalmpl.values.uptr.IRascalValueFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -101,6 +100,8 @@ public class GithubImporter implements IImporter {
 	private String token;
 	@Value("${rascal.api.module}")
 	private String module;
+	@Value("${rascal.osgi.project}")
+	private String osgiProjectPath;
 	private static final String UTF8 = "UTF-8";
 	@Autowired
 	private GithubUserRepository userRepository;
@@ -601,23 +602,26 @@ public class GithubImporter implements IImporter {
 				String valueDecoded = "";
 				
 				for(RepositoryContents content : pathContent) {
-					String contentString = content.getContent();
-					valueDecoded += new String(Base64.decodeBase64(contentString.getBytes()))
-						+ System.getProperty("line.separator");
+					String contentString = new String(Base64.decodeBase64(content.getContent().getBytes()));
+					valueDecoded += contentString;
+					
+					if(!contentString.startsWith("\\s+")) {
+						valueDecoded += System.getProperty("line.separator");
+					}
 				}
 				
-				RascalBridge bridge = new JavaRascalBridge();
+				RascalBridge bridge = new JavaRascalBridge(logger);
 				IValueFactory factory = IRascalValueFactory.getInstance();
-				ISourceLocation moduleRoot = factory.sourceLocation("file","","/Users/ochoa/Documents/cwi/crossminer/code/osgi-analysis-rascal/code/DependenciesAnalyzer/src/");
+				ISourceLocation moduleRoot = factory.sourceLocation("file","",osgiProjectPath);
 				ISourceLocation projectLoc = org.rascalmpl.uri.URIUtil.createFromURI(rep.getHtmlUrl());
 				
 				// Get OSGi model
-				IConstructor osgiModel = (IConstructor) bridge.callFunction(moduleRoot,module,"createSingleBundleOSGiModel",
+				IConstructor osgiModel = (IConstructor) bridge.callFunction(moduleRoot,module,null,"createSingleBundleOSGiModel",
 						new IValue[] {projectLoc,factory.string(valueDecoded)});
-				//Get required bundles and imported packages
-				IList requiredBundles = (IList) bridge.callFunction(moduleRoot,module,"getRequiredBundles", 
+				// Get required bundles and imported packages
+				IList requiredBundles = (IList) bridge.callFunction(moduleRoot,module,null,"getRequiredBundles", 
 						new IValue[] {projectLoc,osgiModel});
-				IList importedPackages = (IList) bridge.callFunction(moduleRoot,module,"getImportedPackages", 
+				IList importedPackages = (IList) bridge.callFunction(moduleRoot,module,null,"getImportedPackages", 
 						new IValue[] {projectLoc,osgiModel});
 				
 				for(IValue r : requiredBundles) {

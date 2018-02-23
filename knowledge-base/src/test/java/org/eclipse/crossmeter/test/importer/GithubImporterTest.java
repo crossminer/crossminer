@@ -81,10 +81,10 @@ public class GithubImporterTest {
 	}
 	@Test
 	public void rascalBridgeTest() throws URISyntaxException {
-		RascalBridge bridge = new JavaRascalBridge();	
+		RascalBridge bridge = new JavaRascalBridge(logger);	
 		ISourceLocation moduleRoot = IRascalValueFactory.getInstance().sourceLocation("file","","/" + System.getProperty("user.dir") + "/src/");
 		IString val = (IString) bridge.callFunction(moduleRoot, 
-				"test::java::org::eclipse::crossmeter::test::importer::RascalModuleTest", 
+				"test::java::org::eclipse::crossmeter::test::importer::RascalModuleTest", null,
 				"testBridge");
 		assertEquals("Hello world!", val.getValue());
 	}
