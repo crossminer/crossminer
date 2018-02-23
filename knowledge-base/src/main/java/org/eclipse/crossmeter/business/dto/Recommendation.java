@@ -9,6 +9,7 @@
  ******************************************************************************/
 package org.eclipse.crossmeter.business.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,6 +18,9 @@ import java.util.List;
  */
 public class Recommendation {
 
+	public Recommendation() {
+		recommendationItems = new ArrayList<>();
+	}
 	private List<RecommendationItem> recommendationItems;
 
 	public List<RecommendationItem> getRecommendationItems() {

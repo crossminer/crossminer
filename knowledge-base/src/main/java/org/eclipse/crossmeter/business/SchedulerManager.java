@@ -12,6 +12,7 @@ package org.eclipse.crossmeter.business;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.crossmeter.business.impl.CROSSRecServiceImpl;
 import org.eclipse.crossmeter.business.impl.ClusterManager;
 import org.eclipse.crossmeter.business.impl.SimilarityManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,9 @@ public class SchedulerManager {
 	@Autowired
 	@Qualifier("Ossmeter")
 	private IImporter importer;
+	
+	@Autowired
+	private CROSSRecServiceImpl crossRecervice;
 
 	// TODO DE-COMMENT ROW BELOW TO ENABLE TASK EXECUTION
 	// @Scheduled(cron = "0 53 12 * * *")
@@ -41,6 +45,7 @@ public class SchedulerManager {
 		try {
 			logger.info("Importing projects from crossminer platform");
 			importer.importAll();
+			crossRecervice.createCROSSRecGraph();
 			logger.info("Imported projects from crossminer platform");
 		} catch (Exception e) {
 		}

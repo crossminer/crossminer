@@ -9,10 +9,12 @@
  ******************************************************************************/
 package org.eclipse.crossmeter.presentation.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.crossmeter.business.IRecommenderManager;
 import org.eclipse.crossmeter.business.ISimilarityCalculator;
+import org.eclipse.crossmeter.business.dto.Dependency;
 import org.eclipse.crossmeter.business.dto.Query;
 import org.eclipse.crossmeter.business.dto.Recommendation;
 import org.eclipse.crossmeter.business.integration.ArtifactRepository;
@@ -74,4 +76,42 @@ public class RecommenderRestController {
     public List<Artifact> getProject(@PathVariable("artifact_query") String projectQuery) {
 		return recommenderManager.getArtifactsByQuery(projectQuery);
     }
+	
+	@RequestMapping("query")
+	public Query getQuery(){
+		Query q = new Query();
+		q.setCompilationUnit("...");
+		q.setCodeSupportRecommendation(false);
+		q.setUpdateVersionRecommendation(false);
+		q.setProjectAlternativesRecommendation(true);
+		q.setComments(new ArrayList<String>());
+		q.getComments().add("TODO");
+		q.getComments().add("connect to Api with gsoup");
+		Dependency d1 = new Dependency();
+		d1.setName("org.apache.httpcomponents:httpclient");
+		d1.setVersion("1.10.4.RELEASE");
+		d1.setUrl("");
+		d1.setArtifactID("5a228b0a2e429420384464da");
+		Dependency d2 = new Dependency();
+		d2.setName("com.google.code.gson:gson");
+		d2.setVersion("6.0.0");
+		d2.setUrl("");
+		d2.setArtifactID("5a228b0f2e42942038446560");
+		Dependency d3 = new Dependency();
+		d3.setName("junit:junit");
+		d3.setVersion("1.2.17");
+		d3.setUrl("");
+		d3.setArtifactID("5a228b162e4294203844660b");
+		q.setProjectDependencies(new ArrayList<Dependency>());
+		q.getProjectDependencies().add(d1);
+		q.getProjectDependencies().add(d2);
+		q.getProjectDependencies().add(d3);
+		q.setClassDependencies(new ArrayList<Dependency>());
+		q.getClassDependencies().add(d2);
+		q.setMethodInvocation("addDocument");
+		q.setRefClassInvocation("IndexWriter");
+		q.setProjectName("MDEForge");
+		q.setTextOffset(1000);
+		return q;
+	}
 }

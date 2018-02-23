@@ -20,6 +20,13 @@ public class RecommendationItem {
 	private Artifact artifact;
 	private double significance;
 	private Object relatedTo;
+	private String recommendationType;
+	public String getRecommendationType() {
+		return recommendationType;
+	}
+	public void setRecommendationType(String recommendationType) {
+		this.recommendationType = recommendationType;
+	}
 	public Artifact getArtifact() {
 		return artifact;
 	}

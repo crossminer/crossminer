@@ -15,7 +15,6 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.apache.log4j.Logger;
-import org.bson.types.ObjectId;
 import org.eclipse.crossmeter.business.IRecommendationProvider;
 import org.eclipse.crossmeter.business.ISimilarityCalculator;
 import org.eclipse.crossmeter.business.ISimilarityManager;
@@ -24,15 +23,10 @@ import org.eclipse.crossmeter.business.dto.Query;
 import org.eclipse.crossmeter.business.dto.Recommendation;
 import org.eclipse.crossmeter.business.dto.RecommendationItem;
 import org.eclipse.crossmeter.business.integration.ArtifactRepository;
-import org.eclipse.crossmeter.business.integration.ClusterRepository;
-import org.eclipse.crossmeter.business.integration.ClusterizationRepository;
 import org.eclipse.crossmeter.business.integration.RelationRepository;
 import org.eclipse.crossmeter.business.model.Artifact;
 import org.eclipse.crossmeter.business.model.ArtifactType;
-import org.eclipse.crossmeter.business.model.Cluster;
-import org.eclipse.crossmeter.business.model.Clusterization;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 /**
@@ -54,6 +48,11 @@ public class ApiRecommendationProvider implements IRecommendationProvider {
 
 	@Autowired
 	private ISimilarityManager similarityManager;
+	
+	@Autowired//		RecommendationEngine engine = new RecommendationEngine(this.srcDir, inputProject);
+//	int numberOfNeighbours = 20;
+//	engine.UserBasedRecommendation(numberOfNeighbours);
+	private CROSSRecServiceImpl crossRecService;
 	
 	@Override
 	public ArtifactType getRecommendationType() {
@@ -77,7 +76,9 @@ public class ApiRecommendationProvider implements IRecommendationProvider {
 						RecommendationItem ri = new RecommendationItem();
 						ri.setRelatedTo(dependency);
 						ri.setArtifact(artifact);
+						ri.setRecommendationType("Alternative");
 						rec.getRecommendationItems().add(ri);
+						
 					}
 	//				Clusterization clusterization = clusterizationRepository.findTopBySimilarityMethodOrderByClusterizationDate(query.getSimilarityMethod());
 	//				Cluster cluster = clusterRepository.findOneByArtifactsIdAndClusterizationId(new ObjectId(dependency.getArtifactID()), new ObjectId(clusterization.getId()));
@@ -92,6 +93,13 @@ public class ApiRecommendationProvider implements IRecommendationProvider {
 				logger.error(e.getMessage());
 			}
 		}
+		
+		/*
+		 * LIBRARY RECOMMENDATION
+		 */
+		Recommendation recommendedLibrary = crossRecService.run(query.getProjectDependencies());
+		rec.getRecommendationItems().addAll(recommendedLibrary.getRecommendationItems());
+		
 		return rec;
 	}
 
