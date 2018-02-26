@@ -29,6 +29,7 @@ import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import org.analyzer.DependenciesAnalyzer;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.log4j.Logger;
 import org.apache.maven.model.Dependency;
@@ -112,6 +113,7 @@ public class GithubImporter implements IImporter {
 	private ArtifactRepository projectRepository;
 
 	private static final Logger logger = Logger.getLogger(GithubImporter.class);
+	private static RascalBridge bridge = new JavaRascalBridge(logger);
 
 	@Override
 	public Artifact importProject(String artId) throws IOException  {
@@ -610,10 +612,11 @@ public class GithubImporter implements IImporter {
 					}
 				}
 				
-				RascalBridge bridge = new JavaRascalBridge(logger);
 				IValueFactory factory = IRascalValueFactory.getInstance();
 				ISourceLocation moduleRoot = factory.sourceLocation("file","",osgiProjectPath);
 				ISourceLocation projectLoc = org.rascalmpl.uri.URIUtil.createFromURI(rep.getHtmlUrl());
+				ClassLoader[] classLoaders = new ClassLoader[1];
+				classLoaders[0] = DependenciesAnalyzer.class.getClassLoader();
 				
 				// Get OSGi model
 				IConstructor osgiModel = (IConstructor) bridge.callFunction(moduleRoot,module,null,"createSingleBundleOSGiModel",
