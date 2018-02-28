@@ -9,9 +9,11 @@
  ******************************************************************************/
 package org.eclipse.crossmeter.test;
 
+import org.eclipse.crossmeter.test.crossrec.CROSSRECTest;
 import org.eclipse.crossmeter.test.importer.GithubImporterTest;
 import org.eclipse.crossmeter.test.manager.ClusterManagerTest;
 import org.eclipse.crossmeter.test.manager.SimilarityManagerTest;
+import org.eclipse.crossmeter.test.recommendation.providers.AlternativeLibrariesRecommendationProviderTest;
 import org.eclipse.crossmeter.test.rest.RecommenderRestTest;
 import org.eclipse.crossmeter.test.similarity.CROSSSimSimilarityCalculatorTest;
 import org.eclipse.crossmeter.test.similarity.CompoundSimilarityCalculatorTest;
@@ -29,7 +31,8 @@ import org.junit.runners.Suite.SuiteClasses;
 		DependencySimilarityCalculatorTest.class, ReadmeSimilarityCalculatorTest.class,
 		RepoPalCompoundSimilarityCalculatorTest.class, RepoPalStarSimilarityCalculatorTest.class,
 		RepoPalTimeSimilarityCalculatorTest.class, SimilarityManagerTest.class, GithubImporterTest.class,
-		ClusterManagerTest.class, DependencyServiceTest.class, RecommenderRestTest.class})
+		ClusterManagerTest.class, DependencyServiceTest.class, RecommenderRestTest.class, CROSSRECTest.class,
+		AlternativeLibrariesRecommendationProviderTest.class, AlternativeLibrariesRecommendationProviderTest.class})
 public class AllTests {
 
 }

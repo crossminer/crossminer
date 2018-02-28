@@ -26,9 +26,6 @@ public class Query {
 	private String compilationUnit;
 	private String methodInvocation;
 	private List<Parameter> parameter;
-	private boolean codeSupportRecommendation;
-	private boolean projectAlternativesRecommendation;
-	private boolean updateVersionRecommendation;
 	private String refClassInvocation;
 	private boolean live;
 	private String similarityMethod;
@@ -37,24 +34,6 @@ public class Query {
 	}
 	public void setCompilationUnit(String compilationUnit) {
 		this.compilationUnit = compilationUnit;
-	}
-	public boolean isCodeSupportRecommendation() {
-		return codeSupportRecommendation;
-	}
-	public void setCodeSupportRecommendation(boolean isCodeSupportRecommendation) {
-		this.codeSupportRecommendation = isCodeSupportRecommendation;
-	}
-	public boolean isProjectAlternativesRecommendation() {
-		return projectAlternativesRecommendation;
-	}
-	public void setProjectAlternativesRecommendation(boolean isDependenciesRecommendation) {
-		this.projectAlternativesRecommendation = isDependenciesRecommendation;
-	}
-	public boolean isUpdateVersionRecommendation() {
-		return updateVersionRecommendation;
-	}
-	public void setUpdateVersionRecommendation(boolean isUpdateVersionRecommendation) {
-		this.updateVersionRecommendation = isUpdateVersionRecommendation;
 	}
 	public List<Dependency> getProjectDependencies() {
 		return projectDependencies;

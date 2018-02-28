@@ -22,10 +22,12 @@ import org.eclipse.crossmeter.business.ISimilarityCalculator;
 import org.eclipse.crossmeter.business.ISimilarityManager;
 import org.eclipse.crossmeter.business.dto.Query;
 import org.eclipse.crossmeter.business.dto.Recommendation;
+import org.eclipse.crossmeter.business.dto.RecommendationType;
 import org.eclipse.crossmeter.business.integration.ArtifactRepository;
 import org.eclipse.crossmeter.business.model.Artifact;
 import org.eclipse.crossmeter.business.model.Cluster;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.index.TextIndexDefinition;
@@ -42,7 +44,11 @@ public class RecommenderManager implements IRecommenderManager {
 
 	private static final Logger logger = Logger.getLogger(RecommenderManager.class);
 	@Autowired
-	private IRecommendationProvider recommendationProvider;
+	@Qualifier("ApiRecommendation")
+	private IRecommendationProvider apiRecommendationProvider;
+	@Autowired
+	@Qualifier("AlternativeLibraries")
+	private IRecommendationProvider alternativeLibrariesrecommendationProvider;
 	@Autowired
 	private ArtifactRepository artifactRepository;
 
@@ -56,9 +62,12 @@ public class RecommenderManager implements IRecommenderManager {
 	private MongoTemplate template;
 
 	@Override
-	public Recommendation getRecommendation(Query query) throws Exception {
-		HashMap<String, Object> params = new HashMap<>();
-		return recommendationProvider.getRecommendation(query, params);
+	public Recommendation getRecommendation(Query query, RecommendationType rt) throws Exception {
+		if(rt.equals(RecommendationType.ALTERNATIVE_LIBRARY))
+			return alternativeLibrariesrecommendationProvider.getRecommendation(query);
+		if(rt.equals(RecommendationType.RECOMMENDED_LIBRARY))
+			return apiRecommendationProvider.getRecommendation(query);
+		else return null;
 	}
 
 	@Override
@@ -78,12 +87,6 @@ public class RecommenderManager implements IRecommenderManager {
 		} catch (Exception e) {
 			return new ArrayList<>();
 		}
-	}
-
-	@Override
-	public Recommendation getRecommendation(Query query, List<IRecommendationProvider> providers) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	private ISimilarityCalculator getSimilarityCalculator(String similarityMethod) throws Exception {

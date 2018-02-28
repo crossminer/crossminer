@@ -7,15 +7,16 @@
  * 
  * SPDX-License-Identifier: EPL-2.0
  ******************************************************************************/
-package org.eclipse.crossmeter.business;
+package org.eclipse.crossmeter.business.integration;
 
-import org.eclipse.crossmeter.business.dto.Query;
-import org.eclipse.crossmeter.business.dto.Recommendation;
+import org.eclipse.crossmeter.business.model.ArtifactType;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
  * @author Juri Di Rocco
  *
  */
-public interface IRecommendationProvider {
-	Recommendation getRecommendation(Query query) throws Exception;
+public interface ArtifactTypeRepository extends MongoRepository<ArtifactType, String> {
+
+	public ArtifactType findOneByName(String name);
 }

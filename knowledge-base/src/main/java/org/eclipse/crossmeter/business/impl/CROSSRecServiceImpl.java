@@ -15,8 +15,10 @@ import org.eclipse.crossmeter.business.dto.Dependency;
 import org.eclipse.crossmeter.business.dto.Recommendation;
 import org.eclipse.crossmeter.business.dto.RecommendationItem;
 import org.eclipse.crossmeter.business.integration.ArtifactRepository;
+import org.eclipse.crossmeter.business.integration.ArtifactTypeRepository;
 import org.eclipse.crossmeter.business.integration.CROSSRecGraphRepository;
 import org.eclipse.crossmeter.business.model.Artifact;
+import org.eclipse.crossmeter.business.model.ArtifactType;
 import org.eclipse.crossmeter.business.model.CROSSRecGraph;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -49,6 +51,9 @@ public class CROSSRecServiceImpl {
 	
 	@Value("${crossrec.numberOfRecommendedLibs}")
 	private int numberOfRecommendedLibs;
+	
+	@Autowired
+	private ArtifactTypeRepository artifactTypeRepository;
 	
 	@Autowired
 	private ArtifactRepository artifactRepository;
@@ -113,6 +118,13 @@ public class CROSSRecServiceImpl {
 				String lib = entry.getKey();
 				RecommendationItem ri = new RecommendationItem();
 				Artifact art = new Artifact();
+				
+				ArtifactType artType = artifactTypeRepository.findOneByName("Library");
+				if(artType == null) {
+					artType = new ArtifactType();
+					artType.setName("Library");
+				}
+				art.setType(artType);
 				art.setName(lib);
 				ri.setArtifact(art);
 				ri.setSignificance(value);
@@ -141,7 +153,7 @@ public class CROSSRecServiceImpl {
 		CROSSRecGraph bigGraph;
 		List<CROSSRecGraph> tempGraphs = crossRecGraphRepository.findAll();
 		if(tempGraphs.size() == 0) {
-			throw new Exception();
+			bigGraph = createCROSSRecGraph();
 		}
 		else bigGraph = tempGraphs.get(0);
 
@@ -374,6 +386,8 @@ public class CROSSRecServiceImpl {
 			if(userItemMatrix[numberOfNeighbours][j]==-1) {					
 				double val2=0;					
 				for(int k=0;k<numberOfNeighbours;k++) {
+					if(k >= artifactRepository.count())
+						break;
 					tmpRating = 0;
 					for(int l=0;l<N;l++)tmpRating+=userItemMatrix[k][l];
 					tmpRating = (double)tmpRating/N;						
@@ -386,7 +400,7 @@ public class CROSSRecServiceImpl {
 		return recommendations;
 	}
 	
-	public void createCROSSRecGraph() {
+	public CROSSRecGraph createCROSSRecGraph() {
 		List<Artifact> arts = artifactRepository.findAll();
 		CROSSRecGraph graph = null;
 		for (Artifact artifact : arts) {
@@ -395,6 +409,7 @@ public class CROSSRecServiceImpl {
 		}
 		crossRecGraphRepository.deleteAll();
 		crossRecGraphRepository.save(graph);
+		return graph;
 	}
 	
 }

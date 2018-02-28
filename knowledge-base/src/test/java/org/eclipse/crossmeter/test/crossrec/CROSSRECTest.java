@@ -16,7 +16,6 @@ import static org.junit.Assert.assertNotNull;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -78,6 +77,11 @@ public class CROSSRECTest {
 	}
 
 	@Test
+	public void createGraphTest() {
+		CROSSRecGraph g = crossRecService.createCROSSRecGraph();
+		assertNotNull(g);
+	}
+	@Test
 	public void getGraphTest() throws Exception {
 		List<Artifact> arts = artifactRepository.findAll();
 		Artifact art = arts.get(0);
@@ -102,7 +106,7 @@ public class CROSSRECTest {
 
 	@Test
 	public void combineGraphEqualsTest() throws Exception {
-		List<Artifact> arts = artifactRepository.findByNumdependencies(10);
+		List<Artifact> arts = artifactRepository.findAll();
 		Artifact art1 = arts.get(0);
 		CROSSRecGraph graph1 = crossRecService.createGraphFromArtifact(art1);
 		CROSSRecGraph graph2 = crossRecService.createGraphFromArtifact(art1);
@@ -116,14 +120,14 @@ public class CROSSRECTest {
 	@Test
 	public void queryCustomTest() throws Exception {
 
-		List<Artifact> arts = artifactRepository.findByNumdependencies(10);
+		List<Artifact> arts = artifactRepository.findAll();
 		assertNotNull(arts);
 		assertNotEquals(arts.size(), 0);
 	}
 
 	@Test
 	public void computeWeightCosineSimilarityTest() throws Exception {
-		List<Artifact> arts = artifactRepository.findByNumdependencies(10);
+		List<Artifact> arts = artifactRepository.findAll();
 		CROSSRecGraph graph = null;
 		for (Artifact artifact : arts) {
 			CROSSRecGraph graph1 = crossRecService.createGraphFromArtifact(artifact);
@@ -144,7 +148,7 @@ public class CROSSRECTest {
 	
 	@Test
 	public void userBasedRecommendationTest() throws Exception {
-		List<Artifact> arts = artifactRepository.findByNumdependencies(10);
+		List<Artifact> arts = artifactRepository.findAll();
 		CROSSRecGraph graph = null;
 		for (Artifact artifact : arts) {
 			CROSSRecGraph graph1 = crossRecService.createGraphFromArtifact(artifact);
@@ -164,7 +168,7 @@ public class CROSSRECTest {
 	}
 	@Test
 	public void runTest() throws Exception {
-		List<Artifact> arts = artifactRepository.findByNumdependencies(10);
+		List<Artifact> arts = artifactRepository.findAll();
 		CROSSRecGraph graph = null;
 		for (Artifact artifact : arts) {
 			CROSSRecGraph graph1 = crossRecService.createGraphFromArtifact(artifact);

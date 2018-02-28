@@ -56,10 +56,12 @@ public class Artifact {
 	private String mirror_url;
 	private long size;
 	private String master_branch;
+	@JsonIgnore
 	private List<GithubUser> committeers = new ArrayList<>();
 	private String readmeText;
+	//@JsonIgnore
 	private List<String> dependencies = new ArrayList<>(); 
-	@JsonIgnore
+	
 	private List<Stargazers> starred = new ArrayList<>();
 	public String getFullName() {
 		return fullName;

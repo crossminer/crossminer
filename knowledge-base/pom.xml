@@ -197,12 +197,6 @@
 			<artifactId>org.eclipse.jdt.core</artifactId>
 			<version>3.12.3</version>
 		</dependency>
-		<!-- Google Collections -->
-		<dependency>
-			<groupId>com.google.collections</groupId>
-			<artifactId>google-collections</artifactId>
-			<version>1.0</version>
-		</dependency>
 		<!-- Guava -->
 		<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
 		<dependency>

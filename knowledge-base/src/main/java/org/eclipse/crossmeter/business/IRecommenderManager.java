@@ -13,6 +13,7 @@ import java.util.List;
 
 import org.eclipse.crossmeter.business.dto.Query;
 import org.eclipse.crossmeter.business.dto.Recommendation;
+import org.eclipse.crossmeter.business.dto.RecommendationType;
 import org.eclipse.crossmeter.business.model.Artifact;
 import org.eclipse.crossmeter.business.model.Cluster;
 
@@ -21,8 +22,7 @@ import org.eclipse.crossmeter.business.model.Cluster;
  *
  */
 public interface IRecommenderManager {
-	Recommendation getRecommendation(Query query) throws Exception;
-	Recommendation getRecommendation(Query query, List<IRecommendationProvider> providers);
+	Recommendation getRecommendation(Query query, RecommendationType rt) throws Exception;
 	List<Cluster> getClusters(String similarityName);
 	List<Artifact> getSimilarProjects(String projectId, String similarityFunction, int numOfResult);
 	List<Artifact> getArtifactsByQuery(String projectQuery);

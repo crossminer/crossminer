@@ -215,9 +215,11 @@ public class SimilarityManager implements ISimilarityManager {
 		List<Artifact> results = new ArrayList<>();
 		for (Relation rel : r1) {
 			if (rel.getFromProject().getId().equals(prj1.getId()))
-				results.add(rel.getToProject());
+				//results.add(rel.getToProject());
+				results.add(artifactRepository.findOne(rel.getToProject().getId()));
 			else
-				results.add(rel.getFromProject());
+				//results.add(rel.getFromProject());
+				results.add(artifactRepository.findOne(rel.getFromProject().getId()));
 		}
 		return results;
 	}

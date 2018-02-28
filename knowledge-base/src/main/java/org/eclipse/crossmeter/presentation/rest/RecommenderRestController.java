@@ -17,6 +17,7 @@ import org.eclipse.crossmeter.business.ISimilarityCalculator;
 import org.eclipse.crossmeter.business.dto.Dependency;
 import org.eclipse.crossmeter.business.dto.Query;
 import org.eclipse.crossmeter.business.dto.Recommendation;
+import org.eclipse.crossmeter.business.dto.RecommendationType;
 import org.eclipse.crossmeter.business.integration.ArtifactRepository;
 import org.eclipse.crossmeter.business.model.Artifact;
 import org.eclipse.crossmeter.business.model.Cluster;
@@ -59,9 +60,14 @@ public class RecommenderRestController {
 		return recommenderManager.getClusters(simFunction);
     }
 
-	@RequestMapping(method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-    public Recommendation getRecommendation(@RequestBody Query query) throws Exception {
-		return recommenderManager.getRecommendation(query);
+	@RequestMapping(value="recommended_libs", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    public Recommendation getRecommendedLibraries(@RequestBody Query query) throws Exception {
+		return recommenderManager.getRecommendation(query, RecommendationType.RECOMMENDED_LIBRARY);
+    }
+	
+	@RequestMapping(value="alternative_recommended", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    public Recommendation getAlternativeLibrary(@RequestBody Query query) throws Exception {
+		return recommenderManager.getRecommendation(query, RecommendationType.ALTERNATIVE_LIBRARY);
     }
 	
 	@RequestMapping(value="similar/p/{id}/m/{sim_method}/n/{num}", produces = "application/json")
@@ -81,9 +87,6 @@ public class RecommenderRestController {
 	public Query getQuery(){
 		Query q = new Query();
 		q.setCompilationUnit("...");
-		q.setCodeSupportRecommendation(false);
-		q.setUpdateVersionRecommendation(false);
-		q.setProjectAlternativesRecommendation(true);
 		q.setComments(new ArrayList<String>());
 		q.getComments().add("TODO");
 		q.getComments().add("connect to Api with gsoup");
