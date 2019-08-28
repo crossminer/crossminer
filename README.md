@@ -16,4 +16,5 @@ The CROSSMINER  consortium consists of the following organisations:
 * Frontendart, Hungary
 * Bitergia, Spain
 * OW2 Consortium, France
+* Castalia Solution, France
 * Eclipse Foundation Europe GmbH, Germany
