@@ -1,0 +1,20 @@
+{
+	"metricid" : "Container.dependencies",
+	"vis" : [ 
+		{
+			"id" : "dependencies",
+			"name" : "Container",
+			"description" : "List of dependencies.",
+			"type" : "LineChart",
+			"datatable" : {
+				"row" : "stargazers",
+				"cols" : [  { "name" : "dependency", "field" : "$dependency" }]
+			},
+			"y" : "dependencies",
+			"x" : "dependencies",
+			"series" :"Container",
+			"timeSeries" : true
+		}
+	]
+
+}
